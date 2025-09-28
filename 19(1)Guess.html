@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            letter-spacing: .05rem;
+        }
+        body{
+            background-color:rgb(82, 79, 79);
+        }
+        h1{
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .input-container{
+            text-align: center;
+        }
+
+        .input-container input{
+            outline: none;
+            border: 2px solid white;
+            background-color: transparent;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            display: block;
+        }
+
+        .indicator-container{
+            margin-top: 1.8rem;
+        }
+
+        .container{
+            display: flex;
+            justify-content: center;
+        }
+
+        .Score{
+            margin-top: 1.8rem;
+        }
+
+        .High-Score{
+            margin-top: 1.8rem;
+        }
+
+        button{
+            margin-top: 1.5rem;
+        }
+
+         button{
+            padding: 0.5rem 2.5rem;
+            background:transparent ;
+            border: 2px solid whitesmoke;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Number Guessing Game</h1>
+
+    <div class="input-container container">
+       <form action="">
+            <input type="number" name="" id=""  required>
+            <Button>Guess</Button>
+       </form>
+    </div>
+
+    
+    <div class="indicator-container container">
+        <h3 id="Message">Start Guessing........  </h3>
+    </div>
+
+    <div class="Score container">
+        <h3>Score : &nbsp;  <h3 id="scoreKeeper"> </h3> </h3>
+    </div>
+
+     <div class="High-Score container">
+        <h3>HighScore : <h3 id="highScore"></h3>  </h3>
+    </div>
+
+    <div class="again-container container">
+        <button id="again">Again</button>
+    </div>
+    <p><p>
+
+
+        
+
+    <script>
+
+        
+        let RandomNum=Math.trunc(Math.random()*20)+1;
+        
+        
+        let score=20;
+        let highScore=0;
+        const Form=document.querySelector('form');
+        const NumInput=document.querySelector('input');
+        const btn=document.querySelector('button');
+        const Message=document.querySelector('#Message');
+       
+         
+        let scorekeeper= document.querySelector('#scoreKeeper');
+        scorekeeper.textContent=score;
+        document.querySelector('#highScore').textContent=highScore;
+        Form.addEventListener('submit',(e)=>{
+
+            e.preventDefault();
+            const UserNum=Number(NumInput.value);
+            
+            if(UserNum===RandomNum){
+                Message.textContent='You Won The Game';
+                document.querySelector('body').style.backgroundColor='green'
+                NumInput.value=""
+                if(score>highScore){
+                    highScore=score
+                    document.querySelector('#highScore').textContent=highScore;
+                }
+                
+
+            }
+            else if(UserNum>RandomNum){
+                if(score>1){
+                    Message.textContent='Too High';
+                    score--;
+                    scorekeeper.textContent=score;
+                }
+                else{
+                    Message.textContent="You lost the game";
+                    scorekeeper.textContent=0;
+                }
+            }
+            else if(UserNum<RandomNum){
+                if(score>1){
+                    Message.textContent='Too Low';
+                score--;
+                    scorekeeper.textContent=score;
+                    
+                }
+                   else{
+                    Message.textContent="You lost the game";
+                    document.querySelector('#scoreKeeper').textContent=0;
+
+                }
+            }
+            else{
+                Message.textContent="Not a Number";
+            }
+        })
+
+        document.querySelector('#again').addEventListener('click',(e)=>{
+            score=20
+            RandomNum=Math.trunc(Math.random()*20)+1
+            scorekeeper.textContent=score;
+            document.querySelector('body').style.backgroundColor="rgb(82, 79, 79)";
+        })
+
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <style>
+        *{
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background-color:burlywood;
+            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            position: relative;
+            height: 100svh;
+           
+        }
+        .btns{
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .btns button{
+            padding: 1rem 2.2rem;
+            background-color: rgb(69, 68, 68);
+            color: white;
+            border-radius: 3rem;
+            font-size: 1.2rem;
+            font-weight:500;
+           
+            outline: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .model{
+            background-color: white;
+            max-width: 450px;
+            min-width: 280px;
+            padding: 1.2rem;
+            border-radius: 1rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            z-index: 2;
+            
+        }
+
+        .model .heading{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .model #close-btn{
+            padding: 0.5rem 1rem;
+            background-color:rgb(69, 68, 68);
+            color: white;
+            border: none;
+            border-radius: .2rem;
+            cursor: pointer;
+        }
+
+        .overlay{
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color:rgba(0, 0, 0, 0.5);
+        }
+
+        .hidden{
+            display: none;
+          
+        }
+        
+    </style>
+<body>
+    <div class="btns">
+        <button>Click Model</button>
+        <button>Click Model</button>
+    </div>
+
+    <div class="model hidden">
+        <div class="heading"><h2>This is a model</h2> <button id="close-btn">&#10006</button> </div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae placeat modi velit, iusto doloremque labore quas facere possimus beatae dignissimos?</p>
+    </div>
+    <div class="overlay hidden"></div>
+
+    <script>
+        const Btns=document.querySelectorAll('.btns button');
+        const Model=document.querySelector('.model');
+        const Overlay=document.querySelector('.overlay');
+
+        const CloseBtn = document.querySelector('#close-btn');
+
+        const ModelClose=function(){
+            Model.classList.add('hidden');
+            Overlay.classList.add('hidden');  
+        }
+        for(let btn of Btns){
+            btn.addEventListener('click',function(e){
+                Model.classList.remove('hidden');
+                Overlay.classList.remove('hidden');
+            })
+        }
+
+        CloseBtn.addEventListener('click',ModelClose)
+
+        Overlay.addEventListener('click',ModelClose)
+    </script>
+</body>
+</html>

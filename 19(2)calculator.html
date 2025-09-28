@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .calculator{
+            display: grid;
+            grid-template-columns: repeat(4,3rem);
+            grid-template-rows: repeat(4,3rem);
+            gap: 0.5rem;
+            place-content: center;
+        }
+
+        button{
+            background: rgb(87, 87, 87);
+            color:white;
+            border: none;
+            font-size: 1.6rem;
+            border-radius:1.5rem ;
+            cursor: pointer;
+        }
+        .input-container{
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        input{
+            height: 4rem;
+            width: 19rem;
+            border: transparent;
+            background-color: rgb(87, 87, 87);
+            color: white;
+            outline: none;
+            font-size: 2rem;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-container">
+        <input type="text" name="" id="">
+    </div>
+    <div class="calculator">
+        <button class="btn">1</button>
+        <button class="btn">2</button>
+        <button class="btn">3</button>
+        <button class="btn">4</button>
+        <button class="btn">5</button>
+        <button class="btn">6</button>
+        <button class="btn">7</button>
+        <button class="btn">8</button>
+        <button class="btn">9</button>
+        <button class="btn">0</button>
+        <button class="btn">+</button>
+        <button class="btn">-</button>
+        <button class="btn">*</button>
+        <button class="btn">/</button>
+        <button id="equal">=</button>
+        <button id="clear">C</button>
+    </div>
+
+    <script>
+        let btns=document.querySelectorAll('.btn');
+        let input=document.querySelector('input');
+        let isResult=false;
+        for(let btn of btns){
+            btn.addEventListener('click',function(e){
+               let Uinput=btn.textContent;
+                input.value+=Uinput;
+
+                if(isResult){
+                    input.value="";
+                    isResult=false;
+                }
+                
+            })
+        }
+
+        let EqBtn=document.querySelector('#equal');
+
+        EqBtn.addEventListener('click',function(e){
+            let Ans=eval(input.value);
+            input.value=Ans;
+            isResult=true;
+        })
+        let clr=document.querySelector('#clear');
+        clr.addEventListener('click',function(){
+            input.value="";
+            isResult=false;
+        })
+    </script>
+</body>
+</html>

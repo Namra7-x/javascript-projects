@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color:bisque;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .quiz-container{
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .quiz-container .quiz-pop{
+            background-color:white;
+            padding: 2rem;
+            border-radius:1rem;
+            box-shadow:  5px 5px black;
+        }
+
+        .quiz-container li{
+            list-style:none;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            border: 2px solid black;
+            border-radius:1.5rem ;
+            cursor: pointer;
+        }
+
+        .quiz-container .btn{
+            text-align: center;
+            padding-top: 1.5rem;
+        }
+
+        .quiz-container button{
+            padding:0.5rem 2.5rem;
+            font-size: 1rem;
+            border-radius: 1rem;
+            background-color:antiquewhite;
+            border: none;
+            cursor: pointer;
+        }
+
+        .quiz-container h1{
+            max-width: 300px;
+            text-align: center;
+        }
+        .disable{
+            pointer-events:none;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="quiz-container">
+        <div class="quiz-pop">
+            <h1 id="Question">Who is best ? </h1>
+
+            <ul>
+                <li class="option optiona">Logan</li>
+                <li class="option optionb">Sam Altman</li>
+                <li class="option optionc">Elon Musk</li>
+            </ul>
+
+            <div class="btn">
+                <Button>NEXT</Button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        let que=[
+            {
+                question:"Who is best ?",
+                opta:"Logan",
+                optb:"Sam Altman",
+                optc:"Elon Musk",
+                answer:"Logan"
+            },
+            {
+                question:"Who is GOAT ?",
+                opta:"Ronaldo",
+                optb:"Messi",
+                optc:"Neymar",
+                answer:"Ronaldo"
+            },
+            {
+                question: "What is the largest ocean on Earth?",
+                opta: "Atlantic",
+                optb: "Indian",
+                optc: "Pacific",
+                answer: "Pacific"
+            },
+            {
+                question: "Who is known as the Father of Computers?",
+                opta: "Charles Babbage",
+                optb: "Alan Turing",
+                optc: "Steve Jobs",
+                answer: "Charles Babbage"
+            },
+            {
+                question: "Which company created the iPhone?",
+                opta: "Samsung",
+                optb: "Apple",
+                optc: "Google",
+                answer: "Apple"
+            }
+
+        ]
+
+
+
+        let Que=document.querySelector('#Question');
+        let optiona=document.querySelector('.optiona');
+        let optionb=document.querySelector('.optionb');
+        let optionc=document.querySelector('.optionc');
+
+
+        let Options=document.querySelectorAll('.option');
+        let Btn=document.querySelector('Button');
+
+        let correct=0;
+        let Qbox=document.querySelector('.quiz-pop');
+
+        let currentQ=0;
+
+        function render(){
+            Que.innerHTML=que[currentQ].question;
+            optiona.innerHTML=que[currentQ].opta;
+            optionb.innerHTML=que[currentQ].optb;
+            optionc.innerHTML=que[currentQ].optc;
+
+            for(let opts of Options){
+                opts.style.backgroundColor="white";
+                opts.classList.remove('disable');
+            }
+        }
+        
+
+        for(let opts of Options){
+            opts.addEventListener("click",function(e){
+                
+                for(let btn of Options){
+                    btn.classList.add('disable');
+                }
+                if(e.target.innerHTML===que[currentQ].answer){
+                    e.target.style.backgroundColor="lightgreen  ";
+                    correct++;
+                }
+                else{
+                    e.target.style.backgroundColor="red";
+                }
+            })
+        }
+
+        Btn.addEventListener("click",function(e){
+            currentQ++;
+
+            if(currentQ<que.length){
+                render();
+            }
+            else{
+                Qbox.innerHTML = `You scored ${correct} out of ${que.length}`;
+            }
+        })
+    </script>
+</body>
+</html>

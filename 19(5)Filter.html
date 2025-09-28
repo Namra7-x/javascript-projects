@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: rgb(67, 67, 67);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .tag-container{
+            color: black;
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tag-container .tag{
+            background-color: #fff;
+            padding: 0.8rem;
+            border-radius:1rem;
+        }
+
+        .category-container{
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            gap: 1rem;
+        }
+
+        .category-container a{
+            text-decoration: underline;
+            color: whitesmoke;
+        }
+
+
+        .hide{
+            display: none;
+        }
+
+        .show{
+            display: inline-block;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="category-container">
+        <h4><a href="" id="pl">Premier League</a></h4>
+        <h4><a href="" id="se">Serie a</a></h4>
+        <h4><a href="" id="ll">La Liga</a></h4>
+        <h4><a href="" id="all">ALL</a></h4>
+    </div>
+    <div class="tag-container">
+        <div class="tag tag-1 PL">Man city</div>
+        <div class="tag tag-2 LL">Real Madrid</div>
+        <div class="tag tag-3 PL">Liverpool</div>
+        <div class="tag tag-4 SE">Inter Milan</div>
+        <div class="tag tag-5 LL">Sevilla</div>
+        <div class="tag tag-6 SE">Juventus</div>
+    </div>
+
+    <script>
+        let Links=document.querySelectorAll('a');
+        let Cards=document.querySelectorAll('.tag');
+
+        for(let link of Links){
+            link.addEventListener('click',function(e){
+
+                e.preventDefault();
+                if(e.target.innerHTML==="Premier League"){
+                    for(let card of Cards){
+                         card.classList.remove('show','hide');
+                        // console.log(card.classList.contains('PL'));
+                        if(card.classList.contains('PL')){
+                           card.classList.add('show')
+                        }
+                        else{
+                            card.classList.add('hide');
+                        }
+                    }
+                }
+                else if(e.target.innerHTML==="Serie a"){
+                    for(let card of Cards){
+                        card.classList.remove('show','hide');
+                        if(card.classList.contains('SE')){
+                            card.classList.add('show')
+                        }
+                        else{
+                             card.classList.add('hide');
+                        }
+                    }
+                }
+                else if(e.target.innerHTML==="La Liga"){
+                    for(let card of Cards){
+                        card.classList.remove('show','hide');
+                        if(card.classList.contains('LL')){
+                            card.classList.add('show');
+                        }
+                        else{
+                            card.classList.add('hide');
+                        }
+                    }
+                }
+                else{
+                    for(let card of Cards){
+                        card.classList.add('show');
+                        card.classList.remove('hide');
+                    }
+                }
+            })  
+        }
+    </script>
+</body>
+</html>

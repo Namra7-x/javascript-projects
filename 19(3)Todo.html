@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        body{
+            background-color: rgb(254, 198, 254);
+        }
+
+        .to-do{
+            max-width:500px ;
+            margin: auto;
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color:white;
+            border-radius:5px ;
+        }
+
+        .input-container{
+            background-color: rgb(217, 217, 217);
+            border-radius: 3rem;
+            display: flex;
+            margin-top: 1.3rem;
+        }
+        .input-container input{
+            flex: 1;
+            border-radius: 3rem;
+            outline: none;
+            border: none;
+            background: transparent;
+            padding: .5rem 1.5rem;
+            font-size: 1rem;
+        }
+
+        .input-container button{
+            padding: .5rem 1.5rem;
+            border-radius: 3rem;
+            outline: none;
+            border: none;
+            background-color: orange;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .list{
+            margin: 1rem;
+            list-style: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /*dynamic style for li*/
+        .li{
+            margin-top:0.8rem ;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        /*dynamic style for del*/
+        .del-btn{
+            padding: .5rem 1rem;
+            border-radius: .4rem;
+            background-color: orange;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /*dynamic style for cancels*/
+        .li-cancel{
+            text-decoration: line-through;
+            color: rgb(214, 211, 211);
+        }
+        /*dynamic checkbox*/
+        .check-box{
+            margin: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="to-do">
+        <h1>Add Task</h1>
+        <div class="input-container">
+            <input type="text" name="" id="" placeholder="Add a Task " >
+            <button>Add</button>
+        </div>
+        <ul class="list">
+            
+        </ul>
+    </div>
+    <script>
+        let btn=document.querySelector('button');
+        let UserInput=document.querySelector('input');
+        let TaksList=document.querySelector('.list');
+        
+        btn.addEventListener('click',function(e){
+            if(UserInput.value===""){
+                alert('input must be required');
+            }
+            else{
+            let InputValue=UserInput.value;
+            let ListElement=document.createElement('li');
+            // ListElement.innerHTML=`${InputValue} `;
+            
+            TaksList.append(ListElement);
+            save();
+            let Para=document.createElement('p');
+            
+            ListElement.append(Para);
+            Para.innerHTML=`${InputValue}`;
+            // ListElement.style.marginTop='0.8rem'
+            ListElement.classList.add('li');
+
+            /*Delete-button*/
+            let Delbtn=document.createElement('button');
+            Delbtn.innerHTML="❌";
+            ListElement.append(Delbtn);
+            Delbtn.classList.add('del-btn');
+
+            /*check box button*/
+            let checkBox=document.createElement('input');
+            checkBox.type="checkbox"
+            Para.prepend(checkBox);
+            checkBox.classList.add('check-box');
+            UserInput.value="";
+            }
+          
+        })
+
+        TaksList.addEventListener('click',function(e){
+             
+            if(e.target.nodeName==="BUTTON"){
+                e.target.parentElement.remove();
+                save()
+            }
+
+            if(e.target.nodeName==="INPUT" ){
+                e.target.parentElement.classList.toggle('li-cancel');
+                save()
+            }
+            
+        })
+
+        function save() {
+        localStorage.setItem('tasks', TaksList.innerHTML);
+        }
+
+        function load() {
+   TaksList.innerHTML = localStorage.getItem('tasks') || '';
+}
+
+load();
+    </script>
+</body>
+</html>

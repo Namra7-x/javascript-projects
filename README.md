@@ -15,6 +15,7 @@ Each project is built with **HTML, CSS, and JavaScript** and is hosted live on G
 | 4  | 🖼️ Model Popup     | [🔗 Live Demo](https://namra7-x.github.io/javascript-projects/19(4)model.html) |
 | 5  | 🔍 Filter Items    | [🔗 Live Demo](https://namra7-x.github.io/javascript-projects/19(5)Filter.html) |
 | 6  | 📝 Quiz App        | [🔗 Live Demo](https://namra7-x.github.io/javascript-projects/19(6)quiz.html) |
+| 7  | 📝 Country Loader API        | [🔗 Live Demo](https://namra7-x.github.io/javascript-projects/1.ajaxcall.html) |
 
 ---
 

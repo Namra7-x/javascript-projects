@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+:root{
+  --bg: #F4FBF6;
+  --card: #FFFFFF;
+  --btn: #2F855A;
+  --btn-hover: #276b4a;
+  --text: #254032;
+  --muted: #6b8b78;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color:var(--bg);
+  color:var(--text);
+}
+
+.form-cont{display:flex;justify-content:center;padding:1rem;}
+.form-cont input{
+  border-radius:2rem;border:none;outline:none;padding:0.5rem 2rem;background:rgba(255,255,255,0.9);color:var(--text);
+}
+.form-cont button{
+  border-radius:0.4rem;background-color:var(--btn);color:#fff;margin-left:0.5rem;border:none;outline:none;padding:0.5rem 1rem;cursor:pointer;transition:background .15s;
+}
+.form-cont button:hover{ background-color:var(--btn-hover); }
+
+.container{display:flex;justify-content:center;gap:0.6rem;opacity:0;flex-wrap:wrap;}
+.container .card{
+  display:flex;flex-direction:column;gap:0.4rem;padding:1rem;max-width:300px;background-color:var(--card);border-radius:1rem;color:var(--text);
+  box-shadow: 0 8px 20px rgba(45,64,54,0.06);
+}
+.container .card h4{margin-top:1rem;color:var(--muted);}
+.container .card img{width:100%;height:180px;object-fit:cover;border-radius:0.5rem;}
+.animation{opacity:1;transition:1s;}
+</style>
+
+
+</head>
+<body>
+
+     <div class="form-cont">
+        <form action="">
+            <input type="text" placeholder="Enter Country Name"><button>Load</button>
+        </form>
+     </div>
+    <div class="container">
+       
+    </div>
+
+  
+
+    <script>
+        let container=document.querySelector('.container');
+
+        let btn=document.querySelector('button');
+        let inpt=document.querySelector('input');
+
+        btn.addEventListener('click',function(e){
+
+            e.preventDefault();
+            let country=inpt.value;
+        
+        const request=new XMLHttpRequest();
+
+        request.open('GET',`https://restcountries.com/v2/name/${country}`);
+        
+        request.send();
+
+        request.addEventListener('load',function(){
+            //console.log(request.responseText);
+
+            const [data]=JSON.parse(request.responseText);
+
+            console.log(data);
+
+            const html=`
+            <div class="card">
+                <img src="${data.flag}" alt="">
+                <h1 class="c-name">Name: ${data.name}</h1>
+                <div class="data">
+                    <h4 class="c-people">population: ${(+data.population/1000000).toFixed(1)}M</h4>
+                    <h4 class="c-lang">language: ${data.languages[0].name}</h4>
+                    <h4 class="c-cur">currency: ${data.currencies[0].name}</h4>
+                </div>
+            </div>
+            `;
+
+            container.innerHTML+=html;
+            container.classList.add('animation');
+        })
+
+            
+
+        })
+
+/* 
+        const LoadCountry=function(cnt){
+            const request=new XMLHttpRequest();
+
+        request.open('GET',`https://restcountries.com/v2/name/${cnt}`);
+        
+        request.send();
+
+        request.addEventListener('load',function(){
+            //console.log(request.responseText);
+
+            const [data]=JSON.parse(request.responseText);
+
+            console.log(data);
+
+            const html=`
+            <div class="card">
+                <img src="${data.flag}" alt="">
+                <h1 class="c-name">Name: ${data.name}</h1>
+                <div class="data">
+                    <h4 class="c-people">population: ${data.population}</h4>
+                    <h4 class="c-lang">language: ${data.languages[0].name}</h4>
+                    <h4 class="c-cur">currency: ${data.currencies[0].name}</h4>
+                </div>
+            </div>
+            `;
+
+            container.innerHTML+=html;
+            container.classList.add('animation');
+        })
+        }
+
+       LoadCountry('germany');
+        LoadCountry('usa'); */
+    </script>
+</body>
+</html>
